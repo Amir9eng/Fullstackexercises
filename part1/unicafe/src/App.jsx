@@ -14,6 +14,10 @@ const App = () => {
   const [allClicks, setAll] = useState([]);
   const [value, setValue] = useState(10);
 
+  const setToValue = (newValue) => () => {
+    setValue(newValue);
+  };
+
   const handleLeftClick = () => {
     setAll(allClicks.concat("L"));
     setLeft(left + 1);
@@ -24,11 +28,6 @@ const App = () => {
     setRight(right + 1);
   };
 
-  const hello = () => {
-    const handler = () => console.log('i"m here');
-    return handler;
-  };
-
   return (
     <div>
       {left}
@@ -37,10 +36,12 @@ const App = () => {
       {right}
       <History allClicks={allClicks} />
 
-      <div>
+      <center>
         {value}
-        <button onClick={hello()}>button</button>
-      </div>
+        <button onClick={setToValue(1000)}>thousand</button>
+        <button onClick={setToValue(0)}>reset</button>
+        <button onClick={setToValue(value + 1)}>increase</button>
+      </center>
     </div>
   );
 };
