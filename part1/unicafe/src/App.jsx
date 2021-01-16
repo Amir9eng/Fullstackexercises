@@ -9,39 +9,16 @@ const History = ({ allClicks }) => {
 };
 
 const App = () => {
-  const [left, setLeft] = useState(0);
-  const [right, setRight] = useState(0);
-  const [allClicks, setAll] = useState([]);
-  const [value, setValue] = useState(10);
-
-  const setToValue = (newValue) => {
-    setValue(newValue);
-  };
-
-  const handleLeftClick = () => {
-    setAll(allClicks.concat("L"));
-    setLeft(left + 1);
-  };
-
-  const handleRightClick = () => {
-    setAll(allClicks.concat("R"));
-    setRight(right + 1);
-  };
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
   return (
     <div>
       {left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
-      {right}
-      <History allClicks={allClicks} />
-
-      <center>
-        {value}
-        <button onClick={() => setToValue(1000)}>thousand</button>
-        <button onClick={() => setToValue(0)}>reset</button>
-        <button onClick={() => setToValue(value + 1)}>increase</button>
-      </center>
+      <button onClick={setGood}>left</button>
+      <button onClick={setBad}>right</button>
+      <History allClicks={setNeutral} />
     </div>
   );
 };
