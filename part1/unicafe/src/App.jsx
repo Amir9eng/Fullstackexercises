@@ -22,7 +22,7 @@ const App = () => {
       <p>bad {bad}</p>
       <p>all {good + neutral + bad}</p>
       <p>average{average}</p>
-      <p>positive {positive}</p>
+      <p>positive {positive} %</p>
     </div>
   );
 };
