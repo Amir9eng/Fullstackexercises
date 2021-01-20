@@ -11,12 +11,15 @@ const App = ({ anecdotes }) => {
 
   const randomNum = () => Math.floor(Math.random() * 5);
 
+  let highestVote = Math.max(...votes);
+
+  let highestVoted = votes.indexOf(highestVote);
+
   const addVotes = (selected) => {
     const allVotes = [...votes];
     allVotes[selected] += 1;
     setVotes(allVotes);
   };
-
   <p>has {votes[selected]} votes</p>;
   console.log(selected);
   return (
@@ -26,6 +29,15 @@ const App = ({ anecdotes }) => {
       <p>has {votes[selected]} votes</p>
       <button onClick={() => setSelected(randomNum)}> next anecdote </button>
       <button onClick={() => addVotes(selected)}>vote</button>
+      <h1>Anecdotes with the most votes </h1>
+      {highestVote > 0 ? (
+        <>
+          <span>{anecdotes[highestVoted]}</span>
+          <span>has {votes[highestVoted]} votes</span>
+        </>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
