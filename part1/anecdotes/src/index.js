@@ -16,19 +16,7 @@ const App = ({ anecdotes }) => {
     allVotes[selected] += 1;
     setVotes(allVotes);
   };
-  // const handleNextAnecdote = () => {
-  //   const nextNum = Math.floor(Math.random() * anecdotes.length);
-  //   setSelected(nextNum);
-  // };
 
-  // const addVotes = () => {
-  //   const newVotes = [...votes];
-  //   newVotes++;
-  //   if (newVotes[selected] > newVotes[mostVotes]) {
-  //     setMostVotes(selected);
-  //   }
-  //   setVotes(newVotes);
-  // };
   <p>has {votes[selected]} votes</p>;
   console.log(selected);
   return (
