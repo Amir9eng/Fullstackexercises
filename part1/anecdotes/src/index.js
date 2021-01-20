@@ -32,7 +32,7 @@ const App = ({ anecdotes }) => {
       {highestVote > 0 ? (
         <>
           <span>{anecdotes[highestVoted]}</span>
-          <span>has {votes[highestVoted]} votes</span>
+          <span> has {votes[highestVoted]} votes</span>
         </>
       ) : (
         ""
