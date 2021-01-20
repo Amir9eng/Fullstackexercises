@@ -7,7 +7,6 @@ const App = ({ anecdotes }) => {
 
   const [selected, setSelected] = useState(0);
   const [votes, setVotes] = useState(initVotes);
-  // const [mostVotes, setMostVotes] = useState(0);
 
   const randomNum = () => Math.floor(Math.random() * 5);
 
