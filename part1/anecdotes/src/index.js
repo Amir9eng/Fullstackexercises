@@ -2,15 +2,42 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
 const App = ({ anecdotes }) => {
+  const initVotes = anecdotes.map((elem) => 0);
+  console.log(initVotes);
+
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(initVotes);
+  // const [mostVotes, setMostVotes] = useState(0);
 
   const randomNum = () => Math.floor(Math.random() * 5);
 
+  const addVotes = (selected) => {
+    const allVotes = [...votes];
+    allVotes[selected] += 1;
+    setVotes(allVotes);
+  };
+  // const handleNextAnecdote = () => {
+  //   const nextNum = Math.floor(Math.random() * anecdotes.length);
+  //   setSelected(nextNum);
+  // };
+
+  // const addVotes = () => {
+  //   const newVotes = [...votes];
+  //   newVotes++;
+  //   if (newVotes[selected] > newVotes[mostVotes]) {
+  //     setMostVotes(selected);
+  //   }
+  //   setVotes(newVotes);
+  // };
+  <p>has {votes[selected]} votes</p>;
   console.log(selected);
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes</p>
       <button onClick={() => setSelected(randomNum)}> next anecdote </button>
+      <button onClick={() => addVotes(selected)}>vote</button>
     </div>
   );
 };
