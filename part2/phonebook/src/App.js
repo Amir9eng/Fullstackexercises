@@ -13,7 +13,14 @@ const App = () => {
     const nameObject = {
       name: newName,
     };
-
+    if (newName === "") {
+      alert("Please add a name");
+      return;
+    }
+    if (persons.some((event) => event.name === newName)) {
+      alert(`${newName} has already been added to the phonebook`);
+      return;
+    }
     setPersons(persons.concat(nameObject));
     setNewName(" ");
   };
