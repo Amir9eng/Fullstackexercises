@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Axios from "axios";
+import React, { useEffect, useState } from "react";
 
 function App() {
+  const [countries, setCountries] = useState([]);
+  const [filtered, setFiltered] = useState("");
+
+  useEffect(() => {
+    Axios("https://restcountries.eu/rest/v2/all")
+      .then(({ data }) => setCountries(data))
+      .catch((error) => console.log(error));
+  }, []);
+
+  const countriesToShow = filtered.trim()
+    ? countries.filter((country) =>
+        country.name.toLowerCase().includes(filtered.toLowerCase())
+      )
+    : [];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form>
+        <div>
+          find countries:{" "}
+          <input
+            type="text"
+            value={filtered}
+            onChange={(e) => setFiltered(e.target.value)}
+          />
+        </div>
+      </form>
+      <div>
+        {countriesToShow.map((country, countryIndex) => (
+          <li key={`country-Index${countryIndex}`}>{country.name}</li>
+        ))}
+      </div>
     </div>
   );
 }
