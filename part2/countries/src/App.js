@@ -2,7 +2,7 @@ import "./App.css";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const OneCountry = ({ country }) => {
+const SingleCountry = ({ country }) => {
   const { name, population, languages, flag, capital } = country[0];
   return (
     <div>
@@ -21,6 +21,7 @@ const OneCountry = ({ country }) => {
 };
 
 const DisplayingCountries = ({ filtered, countries }) => {
+  const [showCountries, setShowCountries] = useState([]);
   const countriesToShow = filtered.trim()
     ? countries.filter((country) =>
         country.name.toLowerCase().includes(filtered.toLowerCase())
@@ -30,14 +31,24 @@ const DisplayingCountries = ({ filtered, countries }) => {
 
   return (
     <div>
-      {countriesLength === 1 ? (
-        <OneCountry country={countriesToShow} />
-      ) : countriesLength < 10 ? (
-        countriesToShow.map((country, countryIndex) => (
-          <p key={`country-Index${countryIndex}`}>{country.name}</p>
-        ))
+      {!showCountries.length ? (
+        countriesLength === 1 ? (
+          <SingleCountry country={countriesToShow} />
+        ) : countriesLength < 10 ? (
+          countriesToShow.map((country, countryIndex) => (
+            <div
+              style={{ display: "flex", alignItems: "center" }}
+              key={`country-index${countryIndex}`}
+            >
+              <p>{country.name}</p>
+              <button onClick={() => setShowCountries([country])}>show</button>
+            </div>
+          ))
+        ) : (
+          <p>Too Many matches,specify another filter</p>
+        )
       ) : (
-        <p>Too many matches, specify another filter </p>
+        <SingleCountry country={showCountries} />
       )}
     </div>
   );
