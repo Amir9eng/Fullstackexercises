@@ -5,12 +5,7 @@ import Person from "./components/Person";
 import { PersonForm } from "./components/PersonForm";
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: "Arto Hellas", number: "040-123456" },
-    { name: "Ada Lovelace", number: "39-44-5323523" },
-    { name: "Dan Abramov", number: "12-43-234345" },
-    { name: "Mary Poppendieck", number: "39-23-6423122" },
-  ]);
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [notes, setNotes] = useState([]);
   const [newNumber, setNewNumber] = useState("");
@@ -18,7 +13,7 @@ const App = () => {
 
   const hook = () => {
     console.log("effect");
-    axios.get("http://localhost:3001/notes").then((response) => {
+    axios.get("http://localhost:3005/contacts").then((response) => {
       console.log("promise fufilled ");
       setNotes(response.data);
     });
@@ -29,29 +24,32 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault();
-    const nameObject = {
-      name: newName,
-      number: newNumber,
-    };
-    if (newName === "") {
+    if (!newName.trim()) {
       alert("Please add a name");
       return;
     }
-    if (newNumber === "") {
+    if (!newNumber.trim()) {
       alert("Please add a number");
       return;
     }
     if (persons.some((event) => event.name === newName)) {
       alert(`${newName} has already been added to the phonebook`);
+      setNewName(" ");
+      setNewNumber("");
       return;
     }
-    if (persons.some((event) => event.number === newName)) {
-      alert(`${newNumber} has already been added to the phonebook`);
-      return;
-    }
-    setPersons(persons.concat(nameObject));
-    setNewName(" ");
-    setNewNumber(" ");
+    const nameObject = {
+      name: newName,
+      number: newNumber,
+    };
+
+    axios
+      .post("http://localhost:3005/contacts", nameObject)
+      .then((response) => {
+        setPersons(persons.concat(nameObject));
+        setNewName(" ");
+        setNewNumber(" ");
+      });
   };
 
   const handleNewName = (event) => {
@@ -59,6 +57,8 @@ const App = () => {
     setNewName(event.target.value);
   };
   const handleNewNumber = (event) => {
+    console.log(event);
+    console.log(event.target.value);
     setNewNumber(event.target.value);
   };
   const handleFilterChange = (event) => {
@@ -80,6 +80,7 @@ const App = () => {
       <PersonForm
         addName={addName}
         newName={newName}
+        newNumber={newNumber}
         handleNameChange={handleNewName}
         handleNumberChange={handleNewNumber}
       />
