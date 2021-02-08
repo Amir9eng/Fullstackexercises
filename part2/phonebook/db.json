@@ -1,11 +1,6 @@
 {
   "contacts": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
-    {
       "name": "Ada Lovelace",
       "number": "39-44-5323523",
       "id": 2
@@ -26,69 +21,9 @@
       "id": 5
     },
     {
-      "name": "ha",
-      "number": "303392302",
-      "id": 6
-    },
-    {
-      "name": "aisha",
-      "number": "4949393",
+      "name": "name",
+      "number": "222736237676236",
       "id": 7
-    },
-    {
-      "name": "euuwuiw",
-      "number": "49493933",
-      "id": 8
-    },
-    {
-      "name": "4332322",
-      "number": "99223232",
-      "id": 9
-    },
-    {
-      "name": "dlsdlsdsde",
-      "number": "992232321",
-      "id": 10
-    },
-    {
-      "name": "kkkkk",
-      "number": "090988",
-      "id": 11
-    },
-    {
-      "name": "jjdjjdd",
-      "number": "33344",
-      "id": 12
-    },
-    {
-      "name": " ade",
-      "number": " 333",
-      "id": 13
-    },
-    {
-      "name": " adeshewa",
-      "number": " 333",
-      "id": 14
-    },
-    {
-      "name": " adeshe",
-      "number": " 333",
-      "id": 15
-    },
-    {
-      "name": " trgftfgrfgg",
-      "number": " 3432323",
-      "id": 16
-    },
-    {
-      "name": " glo",
-      "number": " 0808",
-      "id": 17
-    },
-    {
-      "name": " glol",
-      "number": " 0808",
-      "id": 18
     }
   ]
 }

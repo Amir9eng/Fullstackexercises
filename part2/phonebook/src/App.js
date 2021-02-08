@@ -3,24 +3,22 @@ import axios from "axios";
 import { Filter } from "./components/Filter";
 import Person from "./components/Person";
 import { PersonForm } from "./components/PersonForm";
+import contactService from "./services/contacts";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
-  const [notes, setNotes] = useState([]);
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
 
-  const hook = () => {
-    console.log("effect");
-    axios.get("http://localhost:3005/contacts").then((response) => {
-      console.log("promise fufilled ");
-      setNotes(response.data);
-    });
-  };
-  console.log("render", notes.length, "notes");
-
-  useEffect(hook, []);
+  useEffect(() => {
+    contactService
+      .getAll()
+      .then((res) => setPersons(res.data))
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const addName = (event) => {
     event.preventDefault();
@@ -50,6 +48,19 @@ const App = () => {
         setNewName(" ");
         setNewNumber(" ");
       });
+  };
+
+  const deleteContact = (person) => {
+    const id = Number(person.id);
+    const message = `Do you really want to delete ${person.name}`;
+
+    if (window.confirm(message) === true) {
+      contactService
+        .destroy(id)
+        .then((deletedContact) =>
+          setPersons(persons.filter((p) => p.id !== id))
+        );
+    }
   };
 
   const handleNewName = (event) => {
@@ -85,7 +96,7 @@ const App = () => {
         handleNumberChange={handleNewNumber}
       />
       <h2>Numbers</h2>
-      <Person persons={contactToShow} />
+      <Person persons={contactToShow} deleteContact={deleteContact} />
     </div>
   );
 };
