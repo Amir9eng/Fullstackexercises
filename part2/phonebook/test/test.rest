@@ -1,0 +1,17 @@
+@baseUrl= http://localhost:3003/api/persons
+
+
+GET {{baseUrl}}
+
+
+###
+GET {{baseUrl}}/2
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "sango",
+    "number": "393093902"
+}
